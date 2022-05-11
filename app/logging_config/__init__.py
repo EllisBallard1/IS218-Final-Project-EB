@@ -35,6 +35,13 @@ def setup_logs():
         os.mkdir(logdir)
     logging.config.dictConfig(LOGGING_CONFIG)
 
+def configure_logging():
+    logging.config.dictConfig(LOGGING_CONFIG)
+    log = logging.getLogger("myapp")
+    log.info("My App Logger")
+    log = logging.getLogger("myerrors")
+    log.info("My Error Logger")
+
 
 LOGGING_CONFIG = {
     'version': 1,

@@ -11,7 +11,7 @@ class Transactions(db.Model):
     __tablename__ = 'transactions'
     __table_args__ = {'extend_existing': True}
     id = db.Column(db.Integer, primary_key=True)
-    amount = db.Column(db.String(300), nullable=True, unique=False)
+    amount = db.Column(db.Float(300), nullable=True, unique=False)
     account_type = db.Column(db.String(300), nullable=True, unique=False)
     user_id = db.Column(db.Integer, db.ForeignKey('users.id'))
     user = relationship("User", back_populates="transactions")
