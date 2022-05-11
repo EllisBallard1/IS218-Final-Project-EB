@@ -16,3 +16,4 @@
 2022-05-11 20:32:32,174 [INFO] werkzeug: 172.22.0.1 - - [11/May/2022 20:32:32] "GET /transactions/upload HTTP/1.1" 200 -
 2022-05-11 20:32:35,490 [INFO] werkzeug: 172.22.0.1 - - [11/May/2022 20:32:35] "[32mPOST /transactions/upload HTTP/1.1[0m" 302 -
 2022-05-11 20:32:35,590 [INFO] werkzeug: 172.22.0.1 - - [11/May/2022 20:32:35] "GET /transactions HTTP/1.1" 200 -
+2022-05-11 20:39:57,663 [INFO] werkzeug:  * Detected change in '/home/myuser/tests/upload_test.py', reloading
