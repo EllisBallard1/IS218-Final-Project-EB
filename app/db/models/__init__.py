@@ -7,49 +7,20 @@ from app.db import db
 from flask_login import UserMixin
 
 
-class Song(db.Model):
-    __tablename__ = 'songs'
+class Transactions(db.Model):
+    __tablename__ = 'transactions'
     __table_args__ = {'extend_existing': True}
     id = db.Column(db.Integer, primary_key=True)
-    title = db.Column(db.String(300), nullable=True, unique=False)
-    artist = db.Column(db.String(300), nullable=True, unique=False)
-    year = db.Column(db.String(300), nullable=True, unique=False)
-    genre = db.Column(db.String(300), nullable=True, unique=False)
+    amount = db.Column(db.String(300), nullable=True, unique=False)
+    account_type = db.Column(db.String(300), nullable=True, unique=False)
     user_id = db.Column(db.Integer, db.ForeignKey('users.id'))
-    user = relationship("User", back_populates="songs")
+    user = relationship("User", back_populates="transactions")
 
-    def __init__(self, title, artist, year, genre):
-        self.title = title
-        self.artist = artist
-        self.year = year
-        self.genre = genre
-
-class Location(db.Model):
-    __tablename__ = 'locations'
-    serialize_only = ('title', 'longitude', 'latitude')
+    def __init__(self, amount, account_type):
+        self.amount = amount
+        self.account_type = account_type
 
 
-    id = db.Column(db.Integer, primary_key=True)
-    title = db.Column(db.String(300), nullable=True, unique=False)
-    longitude = db.Column(db.String(300), nullable=True, unique=False)
-    latitude = db.Column(db.String(300), nullable=True, unique=False)
-    population = db.Column(db.Integer, nullable=True, unique=False)
-    user_id = db.Column(db.Integer, db.ForeignKey('users.id'))
-    user = relationship("User", back_populates="locations", uselist=False)
-
-    def __init__(self, title, longitude, latitude, population):
-        self.title = title
-        self.longitude = longitude
-        self.latitude = latitude
-        self.population = population
-
-    def serialize(self):
-        return {
-            'title': self.title,
-            'long': self.longitude,
-            'lat': self.latitude,
-            'population': self.population,
-        }
 
 
 class User(UserMixin, db.Model):
@@ -62,8 +33,8 @@ class User(UserMixin, db.Model):
     registered_on = db.Column('registered_on', db.DateTime)
     active = db.Column('is_active', db.Boolean(), nullable=False, server_default='1')
     is_admin = db.Column('is_admin', db.Boolean(), nullable=False, server_default='0')
-    songs = db.relationship("Song", back_populates="user", cascade="all, delete")
-    locations = db.relationship("Location", back_populates="user", cascade="all, delete")
+    transactions = db.relationship("Transactions", back_populates="user", cascade="all, delete")
+
 
     # `roles` and `groups` are reserved words that *must* be defined
     # on the `User` model to use group- or role-based authorization.
