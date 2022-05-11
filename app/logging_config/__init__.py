@@ -101,6 +101,13 @@ LOGGING_CONFIG = {
             'maxBytes': 10000000,
             'backupCount': 5,
         },
+        'file.handler.debug': {
+            'class': 'logging.handlers.RotatingFileHandler',
+            'formatter': 'standard',
+            'filename': os.path.join(config.Config.LOG_DIR, 'debug.log'),
+            'maxBytes': 10000000,
+            'backupCount': 5,
+        },
         'file.handler.request': {
             'class': 'logging.handlers.RotatingFileHandler',
             'formatter': 'standard',
@@ -174,6 +181,11 @@ LOGGING_CONFIG = {
         },
         'flask': {  # if __name__ == '__main__'
             'handlers': ['file.handler.flask'],
+            'level': 'DEBUG',
+            'propagate': False
+        },
+        'debug': {  # if __name__ == '__main__'
+            'handlers': ['file.handler.debug'],
             'level': 'DEBUG',
             'propagate': False
         },
