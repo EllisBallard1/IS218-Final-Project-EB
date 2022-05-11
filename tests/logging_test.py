@@ -1,22 +1,8 @@
-import logging
-from logging import config
-from pathlib import Path
+import os
+# need to import the loggers and have them print a message in each test
+# holds the root directory path
+root = os.path.dirname(os.path.abspath(__file__))
 
+# make tests for errors, handler, myapp, request, sqalchemy, uploads, and wekzeug logs
 
-def test_debug():
-    file_name = Path(__file__)
-    test_dir = file_name.parent
-    proj_dir = test_dir.parent
-    log_dir = proj_dir / "logs"
-    debug_file = log_dir / "errors.log"
-    assert debug_file.exists()
-
-
-def test_request():
-    file_name = Path(__file__)
-    test_dir = file_name.parent
-    proj_dir = test_dir.parent
-    log_dir = proj_dir / "logs"
-    request_file = log_dir / "request.log"
-    assert request_file.exists()
 

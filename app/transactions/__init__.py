@@ -1,5 +1,6 @@
 import csv
 import logging
+from app.logging_config import configure_upload_logging
 import os
 
 from flask import Blueprint, render_template, abort, url_for,current_app
@@ -44,6 +45,7 @@ def transactions_upload():
         filename = secure_filename(form.file.data.filename)
         filepath = os.path.join(current_app.config['UPLOAD_FOLDER'], filename)
         form.file.data.save(filepath)
+        configure_upload_logging()
         log.info('USER: ' + user + ', FILENAME: ' + filename + ', FILEPATH: ' + filepath)
         #user = current_user
         list_of_transactions = []
