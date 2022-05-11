@@ -9,8 +9,6 @@ simple_pages = Blueprint('simple_pages', __name__,
 
 @simple_pages.route('/')
 def index():
-    log = logging.getLogger("myApp")
-    log.info("test this is index")
     try:
         return render_template('index.html')
 

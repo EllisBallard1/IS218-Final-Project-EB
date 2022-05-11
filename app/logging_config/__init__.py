@@ -14,6 +14,10 @@ log_con = flask.Blueprint('log_con', __name__)
 # @log_con.before_app_request
 # def before_request_logging():
 
+@log_con.before_app_request
+def before_request_logging():
+    log = logging.getLogger("requests")
+    log.info("Before Request")
 
 @log_con.after_app_request
 def after_request_logging(response):
@@ -23,7 +27,11 @@ def after_request_logging(response):
         return response
     elif request.path.startswith('/bootstrap'):
         return response
+
+    log = logging.getLogger("requests")
+    log.info("After Request")
     return response
+
 
 
 @log_con.before_app_first_request
@@ -35,12 +43,18 @@ def setup_logs():
         os.mkdir(logdir)
     logging.config.dictConfig(LOGGING_CONFIG)
 
+@log_con.before_app_first_request
 def configure_logging():
     logging.config.dictConfig(LOGGING_CONFIG)
-    log = logging.getLogger("myapp")
+    log = logging.getLogger("myApp")
     log.info("My App Logger")
     log = logging.getLogger("myerrors")
     log.info("My Error Logger")
+
+def configure_upload_logging():
+    logging.config.dictConfig(LOGGING_CONFIG)
+    log = logging.getLogger("uploads")
+    log.info("Uploaded a file")
 
 
 LOGGING_CONFIG = {
@@ -108,6 +122,7 @@ LOGGING_CONFIG = {
             'maxBytes': 10000000,
             'backupCount': 5,
         },
+
     },
     'loggers': {
         '': {  # root logger
@@ -137,7 +152,7 @@ LOGGING_CONFIG = {
         },
         'uploads': {  # if __name__ == '__main__'
             'handlers': ['file.handler.upload'],
-            'level': 'DEBUG',
+            'level': 'INFO',
             'propagate': False
         },
         'myerrors': {  # if __name__ == '__main__'
@@ -145,6 +160,12 @@ LOGGING_CONFIG = {
             'level': 'DEBUG',
             'propagate': False
         },
+        'requests': {  # if __name__ == '__main__'
+            'handlers': ['file.handler.request'],
+            'level': 'INFO',
+            'propagate': False
+        },
+
 
     }
 }
