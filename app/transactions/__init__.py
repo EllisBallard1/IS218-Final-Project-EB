@@ -47,11 +47,13 @@ def transactions_upload():
         log.info('USER: ' + user + ', FILENAME: ' + filename + ', FILEPATH: ' + filepath)
         #user = current_user
         list_of_transactions = []
+        current_user.balance = 0.00
+
         with open(filepath) as file:
             csv_file = csv.DictReader(file)
             for row in csv_file:
                 list_of_transactions.append(Transactions(row['\ufeffAMOUNT'],row['TYPE']))
-                #add in the year and genre
+                current_user.balance += float(row['\ufeffAMOUNT'])
         current_user.transactions = list_of_transactions
         db.session.commit()
 
