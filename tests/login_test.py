@@ -1,7 +1,6 @@
-from app import db
+
 from app.auth.forms import *
-from flask_login import FlaskLoginClient
-from app.db.models import User
+
 
 
 def test_success_login(application, client):

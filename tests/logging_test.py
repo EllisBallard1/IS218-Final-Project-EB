@@ -28,3 +28,16 @@ def test_wekzeugLogs():
 def test_uploadLogs():
     uploadLogs = os.path.join(root, '../logs/uploads.log')
     assert os.path.exists(uploadLogs) == True
+
+def test_flaskLogs():
+    flaskLogs = os.path.join(root, '../logs/flask.log')
+    if not os.path.exists(flaskLogs):
+        os.mknod(flaskLogs)
+    assert os.path.exists(flaskLogs) == True
+
+def test_debugLogs():
+    debugLogs = os.path.join(root, '../logs/debug.log')
+    if not os.path.exists(debugLogs):
+        os.mknod(debugLogs)
+    assert os.path.exists(debugLogs) == True
+
