@@ -35,5 +35,9 @@ def test_flaskLogs():
         os.mknod(flaskLogs)
     assert os.path.exists(flaskLogs) == True
 
-
+def test_debugLogs():
+    debugLogs = os.path.join(root, '../logs/debug.log')
+    if not os.path.exists(debugLogs):
+        os.mknod(debugLogs)
+    assert os.path.exists(debugLogs) == True
 
