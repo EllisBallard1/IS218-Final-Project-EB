@@ -1,2 +1,4 @@
 2022-05-11 20:32:35,441 [INFO] uploads: Uploaded a file
 2022-05-11 20:32:35,441 [INFO] uploads: USER: abc@email.com, FILENAME: transactions.csv, FILEPATH: /home/myuser/app/uploads/transactions.csv
+2022-05-11 20:58:28,794 [INFO] uploads: Uploaded a file
+2022-05-11 20:58:28,794 [INFO] uploads: USER: abc@email.com, FILENAME: transactions.csv, FILEPATH: /home/myuser/app/uploads/transactions.csv
